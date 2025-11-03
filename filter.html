@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Narrowband Filter Calculator</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        h1 {
+            text-align: center;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        p.subtitle {
+            text-align: center;
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 0;
+            margin-bottom: 30px;
+        }
+        .control-group {
+            margin-bottom: 20px;
+        }
+        .control-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .control-group input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+        }
+        .value-display {
+            font-weight: 700;
+            color: #3949ab;
+        }
+        .output-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .output-box {
+            background-color: #e8eaf6;
+            border-left: 5px solid #3949ab;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+        }
+        .output-box h3 {
+            margin: 0 0 5px 0;
+            font-size: 1em;
+            color: #1a237e;
+        }
+        .output-box p {
+            margin: 0;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #2c387e;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Active Filter Calculator ⚙️</h1>
+        <p class="subtitle">For a Multiple-Feedback Bandpass Filter</p>
+
+        <div class="control-group">
+            <label for="r1">Resistor R1: <span id="r1-val" class="value-display"></span> kΩ</label>
+            <input type="range" id="r1" min="1" max="100" value="10" step="0.1">
+        </div>
+
+        <div class="control-group">
+            <label for="r2">Resistor R2: <span id="r2-val" class="value-display"></span> kΩ</label>
+            <input type="range" id="r2" min="1" max="200" value="100" step="0.1">
+        </div>
+
+        <div class="control-group">
+            <label for="c1">Capacitor C1: <span id="c1-val" class="value-display"></span> nF</label>
+            <input type="range" id="c1" min="1" max="100" value="10" step="0.1">
+        </div>
+
+        <div class="control-group">
+            <label for="c2">Capacitor C2: <span id="c2-val" class="value-display"></span> nF</label>
+            <input type="range" id="c2" min="1" max="100" value="10" step="0.1">
+        </div>
+
+        <div class="output-section">
+            <div class="output-box">
+                <h3>Center Frequency (f₀)</h3>
+                <p id="center-freq-output"></p>
+            </div>
+            <div class="output-box">
+                <h3>Max Gain (Aₘₐₓ)</h3>
+                <p id="max-gain-output"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get references to all the interactive elements
+            const r1Slider = document.getElementById('r1');
+            const r2Slider = document.getElementById('r2');
+            const c1Slider = document.getElementById('c1');
+            const c2Slider = document.getElementById('c2');
+
+            const r1Val = document.getElementById('r1-val');
+            const r2Val = document.getElementById('r2-val');
+            const c1Val = document.getElementById('c1-val');
+            const c2Val = document.getElementById('c2-val');
+
+            const freqOutput = document.getElementById('center-freq-output');
+            const gainOutput = document.getElementById('max-gain-output');
+
+            function calculateAndDisplay() {
+                // 1. Read values from sliders and convert to base units (Ohms, Farads)
+                const R1 = parseFloat(r1Slider.value) * 1000; // kΩ to Ω
+                const R2 = parseFloat(r2Slider.value) * 1000; // kΩ to Ω
+                const C1 = parseFloat(c1Slider.value) * 1e-9; // nF to F
+                const C2 = parseFloat(c2Slider.value) * 1e-9; // nF to F
+
+                // Update the value displays next to the labels
+                r1Val.textContent = r1Slider.value;
+                r2Val.textContent = r2Slider.value;
+                c1Val.textContent = c1Slider.value;
+                c2Val.textContent = c2Slider.value;
+                
+                // 2. Perform the calculations
+                
+                // Center Frequency: f₀ = 1 / (2π * sqrt(R1 * R2 * C1 * C2))
+                const centerFreq = 1 / (2 * Math.PI * Math.sqrt(R1 * R2 * C1 * C2));
+                
+                // Maximum (inverting) Gain: A = -R2 / (2 * R1)
+                const maxGain = -R2 / (2 * R1);
+
+                // 3. Format and display the results
+                
+                // Format frequency to Hz or kHz for readability
+                let freqDisplay;
+                if (centerFreq >= 1000) {
+                    freqDisplay = (centerFreq / 1000).toFixed(2) + " kHz";
+                } else {
+                    freqDisplay = centerFreq.toFixed(2) + " Hz";
+                }
+                
+                freqOutput.textContent = freqDisplay;
+                gainOutput.textContent = maxGain.toFixed(2) + " V/V";
+            }
+
+            // Add event listeners to all sliders to recalculate on change
+            r1Slider.addEventListener('input', calculateAndDisplay);
+            r2Slider.addEventListener('input', calculateAndDisplay);
+            c1Slider.addEventListener('input', calculateAndDisplay);
+            c2Slider.addEventListener('input', calculateAndDisplay);
+
+            // Initial calculation on page load
+            calculateAndDisplay();
+        });
+    </script>
+
+</body>
+</html>

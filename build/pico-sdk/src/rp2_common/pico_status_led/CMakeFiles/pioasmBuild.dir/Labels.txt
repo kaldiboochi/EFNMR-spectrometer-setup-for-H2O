@@ -1,0 +1,13 @@
+# Target labels
+ pioasmBuild
+# Source files and their labels
+/home/nanjundaradhyahy/Desktop/NMR/build/pico-sdk/src/rp2_common/pico_status_led/CMakeFiles/pioasmBuild
+/home/nanjundaradhyahy/Desktop/NMR/build/pico-sdk/src/rp2_common/pico_status_led/CMakeFiles/pioasmBuild.rule
+/home/nanjundaradhyahy/Desktop/NMR/build/pico-sdk/src/rp2_common/pico_status_led/CMakeFiles/pioasmBuild-complete.rule
+/home/nanjundaradhyahy/Desktop/NMR/build/pico-sdk/src/rp2_common/pico_status_led/pioasm/src/pioasmBuild-stamp/pioasmBuild-build.rule
+/home/nanjundaradhyahy/Desktop/NMR/build/pico-sdk/src/rp2_common/pico_status_led/pioasm/src/pioasmBuild-stamp/pioasmBuild-configure.rule
+/home/nanjundaradhyahy/Desktop/NMR/build/pico-sdk/src/rp2_common/pico_status_led/pioasm/src/pioasmBuild-stamp/pioasmBuild-download.rule
+/home/nanjundaradhyahy/Desktop/NMR/build/pico-sdk/src/rp2_common/pico_status_led/pioasm/src/pioasmBuild-stamp/pioasmBuild-install.rule
+/home/nanjundaradhyahy/Desktop/NMR/build/pico-sdk/src/rp2_common/pico_status_led/pioasm/src/pioasmBuild-stamp/pioasmBuild-mkdir.rule
+/home/nanjundaradhyahy/Desktop/NMR/build/pico-sdk/src/rp2_common/pico_status_led/pioasm/src/pioasmBuild-stamp/pioasmBuild-patch.rule
+/home/nanjundaradhyahy/Desktop/NMR/build/pico-sdk/src/rp2_common/pico_status_led/pioasm/src/pioasmBuild-stamp/pioasmBuild-update.rule

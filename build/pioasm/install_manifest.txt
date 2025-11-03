@@ -1,0 +1,5 @@
+/home/nanjundaradhyahy/Desktop/NMR/build/pioasm-install/pioasm/pioasm
+/home/nanjundaradhyahy/Desktop/NMR/build/pioasm-install/pioasm/pioasmTargets.cmake
+/home/nanjundaradhyahy/Desktop/NMR/build/pioasm-install/pioasm/pioasmTargets-release.cmake
+/home/nanjundaradhyahy/Desktop/NMR/build/pioasm-install/pioasm/pioasmConfig.cmake
+/home/nanjundaradhyahy/Desktop/NMR/build/pioasm-install/pioasm/pioasmConfigVersion.cmake

@@ -1,0 +1,19 @@
+.program dac_trigger
+
+.wrap_target
+    ; 1. Wait for a 32-bit value to be sent from the CPU.
+    pull block
+
+    ; 2. Copy the value from the input register (OSR) into the X register,
+    ;    which we will use as our loop counter.
+    mov x, osr
+
+; 3. This is our delay loop. It decrements X until it reaches zero.
+;    This is how we wait for a precise number of clock cycles.
+delay_loop:
+    jmp x-- delay_loop
+
+    ; 4. Once the delay is over, raise interrupt flag 0 (IRQ 0).
+    ;    This signals the CPU to run our C interrupt handler.
+    irq set 0
+.wrap
